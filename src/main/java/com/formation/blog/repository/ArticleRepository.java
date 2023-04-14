@@ -24,6 +24,8 @@ public interface ArticleRepository {
 	 * @return
 	 */
 	Article findById(int id);
+	
+	Collection<Article> getAll();
     
 	/**
      * @param article

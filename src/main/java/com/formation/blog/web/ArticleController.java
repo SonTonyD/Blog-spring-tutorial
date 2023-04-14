@@ -21,16 +21,21 @@ public class ArticleController {
 		return "Greetings from Spring Boot!";
 	}
 	
-	@GetMapping("/article/{articleId}")
+	@GetMapping("/getArticleById/{articleId}")
 	public Article getArticleObject(@PathVariable("articleId") int articleId) {
 		Article article = blogService.findArticleById(articleId);
 		return article;
 	}
 	
-	@GetMapping("/search/{articleName}")
-	public Collection<String> getArticlesByName(@PathVariable("articleName") String articleName) {
-		Collection<String> articles = blogService.findArticleByName(articleName);
+	@GetMapping("/getArticlesByAuthor/{articleAuthor}")
+	public Collection<String> getArticlesByName(@PathVariable("articleAuthor") String articleAuthor) {
+		Collection<String> articles = blogService.findArticleByAuthor(articleAuthor);
 		return articles;
+	}
+	
+	@GetMapping("/getArticles")
+	public Collection<Article> getArticles() {
+		return blogService.getArticles();
 	}
 	
 }

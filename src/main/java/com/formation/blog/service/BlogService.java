@@ -25,8 +25,13 @@ public class BlogService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<String> findArticleByName(String name) {
-		return articleRepository.findByAuthor(name);
+	public Collection<String> findArticleByAuthor(String author) {
+		return articleRepository.findByAuthor(author);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Article> getArticles() {
+		return articleRepository.getAll();
 	}
 	
 	@Transactional
