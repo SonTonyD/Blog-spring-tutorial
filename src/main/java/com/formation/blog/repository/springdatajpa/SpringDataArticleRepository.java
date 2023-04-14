@@ -11,13 +11,14 @@ import com.formation.blog.repository.ArticleRepository;
 
 public interface SpringDataArticleRepository extends ArticleRepository, Repository<Article, Integer> {
 
-	/*
+//	
+//	@Override
+//    @Query("SELECT * FROM ARTICLE WHERE ARTICLE.id =:id")
+//    public Article findById(@Param("id") int id);
+//	
 	@Override
-    @Query("SELECT article FROM Article WHERE article.id =:id")
-    public Article findById(@Param("id") int id);
+	@Query("SELECT name FROM Article")
+	public Collection<String> findByAuthor(@Param("author") String author);
+//	
 	
-	@Override
-	@Query("SELECT article FROM Article WHERE article.name =:name")
-	public Collection<Article> findByName(@Param("name") String name);
-	*/
 }

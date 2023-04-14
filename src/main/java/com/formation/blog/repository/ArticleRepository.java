@@ -14,10 +14,10 @@ public interface ArticleRepository {
 	/**
 	 * Retrieve an <code>Owner</code> from the data store by id.
 	 * 
-	 * @param name
+	 * @param author
 	 * @return
 	 */
-	Collection<Article> findByName(String name);
+	Collection<String> findByAuthor(String author);
 	
 	/**
 	 * @param id

@@ -16,8 +16,22 @@ public class Article {
 	
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "author")
+	private String author;
 
-    public String getName() {
+	@Column(name = "content")
+	private String content;
+
+    public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getName() {
 		return name;
 	}
 
@@ -36,4 +50,12 @@ public class Article {
     public boolean isNew() {
         return this.id == null;
     }
+    
+    public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 }
