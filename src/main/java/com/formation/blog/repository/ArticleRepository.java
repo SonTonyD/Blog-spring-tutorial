@@ -38,4 +38,6 @@ public interface ArticleRepository {
      * @param article
      */
     void save(Article article);
+    
+    void deleteById(int id);
 }

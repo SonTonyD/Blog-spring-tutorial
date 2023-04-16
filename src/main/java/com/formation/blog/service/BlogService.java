@@ -48,4 +48,9 @@ public class BlogService {
 	public void createArticle(Article article) {
 		articleRepository.save(article);
 	}
+	
+	@Transactional
+	public void deleteArticleById(int articleId) {
+		articleRepository.deleteById(articleId);
+	}
 }
