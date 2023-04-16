@@ -5,6 +5,9 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.blog.model.Article;
@@ -21,21 +24,35 @@ public class ArticleController {
 		return "Greetings from Spring Boot!";
 	}
 	
-	@GetMapping("/getArticleById/{articleId}")
+	@GetMapping("/articles")
+	public Collection<Article> getArticles() {
+		return blogService.getArticles();
+	}
+	
+	@GetMapping("/articles/{articleId}")
 	public Article getArticleObject(@PathVariable("articleId") int articleId) {
 		Article article = blogService.findArticleById(articleId);
 		return article;
 	}
 	
-	@GetMapping("/getArticlesByAuthor/{articleAuthor}")
+	@GetMapping("/articles/author/{articleAuthor}")
 	public Collection<String> getArticlesByName(@PathVariable("articleAuthor") String articleAuthor) {
 		Collection<String> articles = blogService.findArticleByAuthor(articleAuthor);
 		return articles;
 	}
 	
-	@GetMapping("/getArticles")
-	public Collection<Article> getArticles() {
-		return blogService.getArticles();
+	@PutMapping("/articles/{articleId}")
+	public void updateArticleContent(@PathVariable("articleId") int articleId, @RequestBody String content) {
+		blogService.updateArticleContent(content, articleId);
 	}
+	
+	@PostMapping("/articles/new")
+	public void createArticle(@RequestBody Article article) {
+		blogService.createArticle(article);
+	}
+	
+	
+	
+
 	
 }

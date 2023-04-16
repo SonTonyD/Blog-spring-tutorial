@@ -2,6 +2,7 @@ package com.formation.blog.repository.springdatajpa;
 
 import java.util.Collection;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -23,5 +24,15 @@ public interface SpringDataArticleRepository extends ArticleRepository, Reposito
 	@Override
 	@Query(value = "SELECT * FROM Article", nativeQuery = true)
 	public Collection<Article> getAll();
+	
+	@Override
+	@Modifying
+	@Query(value = "UPDATE Article SET Article.content=:newContent WHERE id =:id", nativeQuery = true)
+	public void updateContent(@Param("newContent") String newContent, @Param("id") int id);
+	
+	
+//	@Override
+//	@Query(value = "")
+//	public void create()
 	
 }

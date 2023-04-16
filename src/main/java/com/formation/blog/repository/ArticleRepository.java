@@ -25,7 +25,14 @@ public interface ArticleRepository {
 	 */
 	Article findById(int id);
 	
+	/**
+	 * @return
+	 */
 	Collection<Article> getAll();
+	
+	void updateContent(String newContent, int id);
+	
+//	void create(Article article);
     
 	/**
      * @param article

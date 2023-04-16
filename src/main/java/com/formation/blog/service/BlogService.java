@@ -38,4 +38,14 @@ public class BlogService {
 	public void saveArticle(Article article) {
 		articleRepository.save(article);
 	}
+	
+	@Transactional
+	public void updateArticleContent(String newContent, int id) {
+		articleRepository.updateContent(newContent, id);
+	}
+	
+	@Transactional
+	public void createArticle(Article article) {
+		articleRepository.save(article);
+	}
 }

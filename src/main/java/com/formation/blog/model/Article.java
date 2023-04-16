@@ -1,5 +1,7 @@
 package com.formation.blog.model;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "article")
 public class Article {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 	
 	@Column(name = "name")
@@ -57,5 +59,23 @@ public class Article {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(author, content, id, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Article other = (Article) obj;
+		return Objects.equals(author, other.author) && Objects.equals(content, other.content)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 }
