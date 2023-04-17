@@ -8,19 +8,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.blog.model.Article;
 import com.formation.blog.model.Review;
+import com.formation.blog.model.User;
 import com.formation.blog.repository.ArticleRepository;
 import com.formation.blog.repository.ReviewRepository;
+import com.formation.blog.repository.UserRepository;
 
 @Service
 public class BlogService {
 	
 	private ArticleRepository articleRepository;
 	private ReviewRepository reviewRepository;
+	private UserRepository userRepository;
 	
 	@Autowired
-	public BlogService(ArticleRepository articleRepository, ReviewRepository reviewRepository) {
+	public BlogService(ArticleRepository articleRepository, ReviewRepository reviewRepository, UserRepository userRepository) {
 		this.articleRepository = articleRepository;
 		this.reviewRepository = reviewRepository;
+		this.userRepository = userRepository;
 	}
 	
 	@Transactional(readOnly = true)
@@ -71,5 +75,15 @@ public class BlogService {
 	@Transactional
 	public void createReview(Review review) {
 		reviewRepository.save(review);
+	}
+	
+	@Transactional
+	public Collection<User> getUsers() {
+		return userRepository.getAll();
+	}
+	
+	@Transactional
+	public User getUserById(int userId) {
+		return userRepository.findUserById(userId);
 	}
 }
