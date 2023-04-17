@@ -5,3 +5,8 @@ INSERT INTO article (name, content, author) VALUES ('sport article', 'I am an ar
 INSERT INTO article (name, content, author) VALUES ('news article', 'I am an article and this is the content', 'Bob');
 INSERT INTO article (name, content, author) VALUES ('people article', 'I am an article and this is the content', 'Alice');
 INSERT INTO article (name, content, author) VALUES ('science article', 'I am an article and this is the content', 'Alice');
+
+
+INSERT INTO review (content, author, article_id) VALUES ('Good articles !', 'David', 3);
+INSERT INTO review (content, author, article_id) VALUES ('Very good articles !', 'Henry', 5);
+INSERT INTO review (content, author, article_id) VALUES ('This article helps me a lot !', 'Romain', 1);

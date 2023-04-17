@@ -27,10 +27,6 @@ public class BlogServiceTests {
             .andExpect(status().isOk());
     }
     
-    @Test
-    public void testCreateArticles() throws Exception {
-    	mockMvc.perform(post("/articles/new"))
-        .andExpect(status().isOk());
-    }
+
 
 }

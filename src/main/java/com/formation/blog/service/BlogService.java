@@ -7,16 +7,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.formation.blog.model.Article;
+import com.formation.blog.model.Review;
 import com.formation.blog.repository.ArticleRepository;
+import com.formation.blog.repository.ReviewRepository;
 
 @Service
 public class BlogService {
 	
 	private ArticleRepository articleRepository;
+	private ReviewRepository reviewRepository;
 	
 	@Autowired
-	public BlogService(ArticleRepository articleRepository) {
+	public BlogService(ArticleRepository articleRepository, ReviewRepository reviewRepository) {
 		this.articleRepository = articleRepository;
+		this.reviewRepository = reviewRepository;
 	}
 	
 	@Transactional(readOnly = true)
@@ -52,5 +56,15 @@ public class BlogService {
 	@Transactional
 	public void deleteArticleById(int articleId) {
 		articleRepository.deleteById(articleId);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Review> getReviews() {
+		return reviewRepository.getAll();
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Review> getReviewsOfArticle(int articleId) {
+		return reviewRepository.findByArticleId(articleId);
 	}
 }

@@ -18,7 +18,7 @@ import com.formation.blog.service.BlogService;
 public class ArticleController {
 	
 	@Autowired
-	protected BlogService blogService;
+	private BlogService blogService;
 	
 	@GetMapping("/")
 	public String index() {
