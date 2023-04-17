@@ -25,7 +25,7 @@ public class BlogService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Collection<String> findArticleByAuthor(String author) {
+	public Collection<Article> findArticleByAuthor(String author) {
 		return articleRepository.findByAuthor(author);
 	}
 	

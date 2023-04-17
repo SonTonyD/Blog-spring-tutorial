@@ -17,7 +17,7 @@ public interface ArticleRepository {
 	 * @param author
 	 * @return
 	 */
-	Collection<String> findByAuthor(String author);
+	Collection<Article> findByAuthor(String author);
 	
 	/**
 	 * @param id

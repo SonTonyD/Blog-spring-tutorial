@@ -30,15 +30,15 @@ public class ArticleController {
 		return blogService.getArticles();
 	}
 	
-	@GetMapping("/articles/{articleId}")
+	@GetMapping("/article/{articleId}")
 	public Article getArticleObject(@PathVariable("articleId") int articleId) {
 		Article article = blogService.findArticleById(articleId);
 		return article;
 	}
 	
 	@GetMapping("/articles/author/{articleAuthor}")
-	public Collection<String> getArticlesByName(@PathVariable("articleAuthor") String articleAuthor) {
-		Collection<String> articles = blogService.findArticleByAuthor(articleAuthor);
+	public Collection<Article> getArticlesByAuthor(@PathVariable("articleAuthor") String articleAuthor) {
+		Collection<Article> articles = blogService.findArticleByAuthor(articleAuthor);
 		return articles;
 	}
 	
@@ -53,7 +53,7 @@ public class ArticleController {
 	}
 	
 	@DeleteMapping("/articles/{articleId}")
-	public void deleteArticle(@PathVariable("articleId") int articleId) {
+	public void deleteArticleById(@PathVariable("articleId") int articleId) {
 		blogService.deleteArticleById(articleId);
 	}
 	

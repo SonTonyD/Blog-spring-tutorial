@@ -18,8 +18,8 @@ public interface SpringDataArticleRepository extends ArticleRepository, Reposito
     public Article findById(@Param("id") int id);
 	
 	@Override
-	@Query("SELECT name FROM Article WHERE author =:author")
-	public Collection<String> findByAuthor(@Param("author") String author);
+	@Query(value = "SELECT * FROM Article WHERE author =:author", nativeQuery = true)
+	public Collection<Article> findByAuthor(@Param("author") String author);
 	
 	@Override
 	@Query(value = "SELECT * FROM Article", nativeQuery = true)
