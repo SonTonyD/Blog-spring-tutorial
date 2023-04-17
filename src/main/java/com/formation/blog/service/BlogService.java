@@ -67,4 +67,9 @@ public class BlogService {
 	public Collection<Review> getReviewsOfArticle(int articleId) {
 		return reviewRepository.findByArticleId(articleId);
 	}
+	
+	@Transactional
+	public void createReview(Review review) {
+		reviewRepository.save(review);
+	}
 }

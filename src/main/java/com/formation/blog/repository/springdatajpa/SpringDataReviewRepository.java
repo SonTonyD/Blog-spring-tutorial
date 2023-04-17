@@ -16,6 +16,6 @@ public interface SpringDataReviewRepository extends ReviewRepository, Repository
 	public Collection<Review> getAll();
 	
 	@Override
-	@Query(value = "SELECT * FROM Review WHERE article_id =:articleId", nativeQuery = true)
-	public Collection<Review> findByArticleId(@Param("articleId") int articleId);
+	@Query(value = "SELECT * FROM Review WHERE article_id =:article_id", nativeQuery = true)
+	public Collection<Review> findByArticleId(@Param("article_id") int articleId);
 }
