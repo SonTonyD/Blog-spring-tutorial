@@ -18,4 +18,5 @@ public interface SpringDataUserRepository extends UserRepository, Repository<Use
 	@Override
 	@Query(value = "SELECT * FROM Userdata WHERE id =:id", nativeQuery = true)
 	public User findUserById(@Param("id") int userId);
+	
 }

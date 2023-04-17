@@ -86,4 +86,10 @@ public class BlogService {
 	public User getUserById(int userId) {
 		return userRepository.findUserById(userId);
 	}
+
+	@Transactional
+	public void signUp(User user) {
+		//Check if username exist
+		userRepository.save(user);
+	}
 }
