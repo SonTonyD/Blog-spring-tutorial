@@ -12,6 +12,7 @@ import com.formation.blog.model.User;
 import com.formation.blog.repository.ArticleRepository;
 import com.formation.blog.repository.ReviewRepository;
 import com.formation.blog.repository.UserRepository;
+import com.formation.blog.util.ResponseTransfer;
 
 @Service
 public class BlogService {
@@ -88,8 +89,13 @@ public class BlogService {
 	}
 
 	@Transactional
-	public void signUp(User user) {
-		//Check if username exist
+	public ResponseTransfer signUp(User user) {
+		
+		if (userRepository.findUserByUsername(user.getUsername()).size() != 0) {
+			return new ResponseTransfer("Username already exists");
+		}
+		
 		userRepository.save(user);
+		return new ResponseTransfer("Registration complete !");
 	}
 }
