@@ -18,9 +18,13 @@ public class User {
 	
 	@Column(name = "username")
 	private String username;
+	
+	@Column(name = "email")
+	private String email;
 
 	@Column(name = "password")
 	private String password;
+	
 
 	public Integer getId() {
 		return id;
@@ -47,8 +51,21 @@ public class User {
 	}
 
 	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + "]";
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
 	public int hashCode() {
-		return Objects.hash(id, password, username);
+		return Objects.hash(email, id, password, username);
 	}
 
 	@Override
@@ -60,13 +77,9 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(id, other.id) && Objects.equals(password, other.password)
-				&& Objects.equals(username, other.username);
+		return Objects.equals(email, other.email) && Objects.equals(id, other.id)
+				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
-	}
+	
 	
 }

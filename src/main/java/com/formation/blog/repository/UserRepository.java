@@ -10,6 +10,8 @@ public interface UserRepository {
 	
 	Collection<User> findUserByUsername(String username);
 	
+	Collection<User> findUserByEmail(String email);
+	
 	User findUserById(int userId);
 	
 	void save(User user);

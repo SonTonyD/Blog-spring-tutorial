@@ -20,18 +20,13 @@ public class ArticleController {
 	@Autowired
 	private BlogService blogService;
 	
-	@GetMapping("/")
-	public String index() {
-		return "Greetings from Spring Boot!";
-	}
-	
 	@GetMapping("/articles")
 	public Collection<Article> getArticles() {
 		return blogService.getArticles();
 	}
 	
 	@GetMapping("/article/{articleId}")
-	public Article getArticleObject(@PathVariable("articleId") int articleId) {
+	public Article getArticleById(@PathVariable("articleId") int articleId) {
 		Article article = blogService.findArticleById(articleId);
 		return article;
 	}

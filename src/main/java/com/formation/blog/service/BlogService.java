@@ -91,10 +91,12 @@ public class BlogService {
 	@Transactional
 	public ResponseTransfer signUp(User user) {
 		
-		if (userRepository.findUserByUsername(user.getUsername()).size() != 0) {
-			return new ResponseTransfer("Username already exists");
-		}
+		boolean isUserUnique = userRepository.findUserByUsername(user.getUsername()).size() == 0
+				&& userRepository.findUserByEmail(user.getEmail()).size() == 0;
 		
+		if (!isUserUnique) {
+			return new ResponseTransfer("Username or Email already exists");
+		}
 		userRepository.save(user);
 		return new ResponseTransfer("Registration complete !");
 	}

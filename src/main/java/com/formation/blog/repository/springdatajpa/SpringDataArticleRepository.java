@@ -31,8 +31,4 @@ public interface SpringDataArticleRepository extends ArticleRepository, Reposito
 	public void updateContent(@Param("newContent") String newContent, @Param("id") int id);
 	
 	
-//	@Override
-//	@Query(value = "")
-//	public void create()
-	
 }
