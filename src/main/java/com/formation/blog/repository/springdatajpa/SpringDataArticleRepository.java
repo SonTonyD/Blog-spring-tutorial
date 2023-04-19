@@ -11,7 +11,6 @@ import com.formation.blog.model.Article;
 
 public interface SpringDataArticleRepository extends JpaRepository<Article, Integer> {
 
-	
 	@Query(value = "SELECT * FROM Article WHERE author =:author", nativeQuery = true)
 	public Collection<Article> findByAuthor(@Param("author") String author);
 	

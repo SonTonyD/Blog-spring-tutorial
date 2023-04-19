@@ -13,41 +13,41 @@ import com.formation.blog.repository.springdatajpa.SpringDataArticleRepository;
 @Service
 public class ArticleService {
 	
-	private SpringDataArticleRepository articleRepository;
+	private SpringDataArticleRepository springDataArticleRepository;
 	
 	@Autowired
 	public ArticleService(SpringDataArticleRepository articleRepository) {
-		this.articleRepository = articleRepository;
+		this.springDataArticleRepository = articleRepository;
 	}
 	
 	@Transactional(readOnly = true)
 	public Collection<Article> getArticles() {
-		return articleRepository.findAll();
+		return springDataArticleRepository.findAll();
 	}
 	
 	@Transactional(readOnly = true)
 	public Optional<Article> findArticleById(int id) {
-		return articleRepository.findById(id);
+		return springDataArticleRepository.findById(id);
 	}
 	
 	@Transactional(readOnly = true)
 	public Collection<Article> findArticleByAuthor(String author) {
-		return articleRepository.findByAuthor(author);
+		return springDataArticleRepository.findByAuthor(author);
 	}
 	
 	@Transactional
 	public void updateArticleContent(String newContent, int id) {
-		articleRepository.updateContent(newContent, id);
+		springDataArticleRepository.updateContent(newContent, id);
 	}
 	
 	@Transactional
 	public void createArticle(Article article) {
-		articleRepository.save(article);
+		springDataArticleRepository.save(article);
 	}
 	
 	@Transactional
 	public void deleteArticleById(int articleId) {
-		articleRepository.deleteById(articleId);;
+		springDataArticleRepository.deleteById(articleId);;
 	}
 
 }

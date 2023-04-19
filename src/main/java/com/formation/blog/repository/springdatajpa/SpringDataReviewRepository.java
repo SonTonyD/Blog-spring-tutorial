@@ -10,11 +10,6 @@ import com.formation.blog.model.Review;
 
 public interface SpringDataReviewRepository extends JpaRepository<Review, Integer> {
 
-//	@Override
-//	@Query(value = "SELECT * FROM Review", nativeQuery = true)
-//	public Collection<Review> getAll();
-//	
-//	@Override
-//	@Query(value = "SELECT * FROM Review WHERE article_id =:article_id", nativeQuery = true)
-//	public Collection<Review> findByArticleId(@Param("article_id") int articleId);
+	@Query(value = "SELECT * FROM Review WHERE article_id =:article_id", nativeQuery = true)
+	public Collection<Review> findByArticleId(@Param("article_id") int articleId);
 }
