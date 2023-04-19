@@ -12,16 +12,12 @@ import com.formation.blog.model.Article;
 public interface SpringDataArticleRepository extends JpaRepository<Article, Integer> {
 
 	
-	/*
-	@Override
+	@Query(value = "SELECT * FROM Article WHERE author =:author", nativeQuery = true)
 	public Collection<Article> findByAuthor(@Param("author") String author);
 	
-	
-	@Override
 	@Modifying
 	@Query(value = "UPDATE Article SET Article.content=:newContent WHERE id =:id", nativeQuery = true)
 	public void updateContent(@Param("newContent") String newContent, @Param("id") int id);
-	*/
 	
 	
 }

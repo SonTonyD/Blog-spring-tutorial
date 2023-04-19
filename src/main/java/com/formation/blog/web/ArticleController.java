@@ -1,6 +1,7 @@
 package com.formation.blog.web;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,44 +13,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.blog.model.Article;
-import com.formation.blog.service.BlogService;
+import com.formation.blog.service.ArticleService;
 
 @RestController
 public class ArticleController {
 	
 	@Autowired
-	private BlogService blogService;
+	private ArticleService articleService;
 	
 	@GetMapping("/articles")
 	public Collection<Article> getArticles() {
-		return blogService.getArticles();
+		return articleService.getArticles();
 	}
 	
 	@GetMapping("/article/{articleId}")
-	public Article getArticleById(@PathVariable("articleId") int articleId) {
-		Article article = blogService.findArticleById(articleId);
+	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) {
+		Optional<Article> article = articleService.findArticleById(articleId);
 		return article;
 	}
 	
 	@GetMapping("/articles/author/{articleAuthor}")
 	public Collection<Article> getArticlesByAuthor(@PathVariable("articleAuthor") String articleAuthor) {
-		Collection<Article> articles = blogService.findArticleByAuthor(articleAuthor);
+		Collection<Article> articles = articleService.findArticleByAuthor(articleAuthor);
 		return articles;
 	}
 	
 	@PutMapping("/articles/{articleId}")
 	public void updateArticleContent(@PathVariable("articleId") int articleId, @RequestBody String content) {
-		blogService.updateArticleContent(content, articleId);
+		articleService.updateArticleContent(content, articleId);
 	}
 	
 	@PostMapping("/articles/new")
 	public void createArticle(@RequestBody Article article) {
-		blogService.createArticle(article);
+		articleService.createArticle(article);
 	}
 	
 	@DeleteMapping("/articles/{articleId}")
 	public void deleteArticleById(@PathVariable("articleId") int articleId) {
-		blogService.deleteArticleById(articleId);
+		articleService.deleteArticleById(articleId);
 	}
 	
 
