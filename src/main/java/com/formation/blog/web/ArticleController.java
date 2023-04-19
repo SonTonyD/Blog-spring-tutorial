@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.formation.blog.exceptions.EntityNotFoundException;
 import com.formation.blog.model.Article;
 import com.formation.blog.service.ArticleService;
 
@@ -26,11 +28,37 @@ public class ArticleController {
 		return articleService.getArticles();
 	}
 	
+//	@GetMapping("/article/{articleId}")
+//	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) {
+//		Optional<Article> article = articleService.findArticleById(articleId);
+//		return Optional.ofNullable(article.orElseThrow(() -> new EntityNotFoundException("article not found")));
+//	}
+	
+//	@GetMapping("/article/{articleId}")
+//	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) throws EntityNotFoundException{
+//		Optional<Article> article = articleService.findArticleById(articleId);
+//		
+//		if (article.isEmpty()) {
+//			throw new EntityNotFoundException("article is not found");
+//		}
+//		
+//		return article;
+//	}
+	
 	@GetMapping("/article/{articleId}")
 	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) {
-		Optional<Article> article = articleService.findArticleById(articleId);
+		//Optional<Article> article = articleService.findArticleById(articleId);
+		
+		Optional<Article> article = Optional.ofNullable(articleService.findArticleById(articleId)
+				.orElseThrow(() -> new EntityNotFoundException("article is not found")));
+		
+//		if (article.isEmpty()) {
+//			throw new EntityNotFoundException("article is not found");
+//		}
+		
 		return article;
 	}
+	
 	
 	@GetMapping("/articles/author/{articleAuthor}")
 	public Collection<Article> getArticlesByAuthor(@PathVariable("articleAuthor") String articleAuthor) {
