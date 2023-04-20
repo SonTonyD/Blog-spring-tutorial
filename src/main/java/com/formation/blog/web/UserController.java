@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.formation.blog.exceptions.EntityNotFoundException;
 import com.formation.blog.model.User;
 import com.formation.blog.service.UserService;
 import com.formation.blog.util.ResponseTransfer;
@@ -28,7 +29,9 @@ public class UserController {
 	
 	@GetMapping("/users/{id}")
 	public Optional<User> getUserById(@PathVariable("id") int userId) {
-		return userService.getUserById(userId);
+		Optional<User> user = Optional.ofNullable(userService.getUserById(userId)
+				.orElseThrow(() -> new EntityNotFoundException("User not found with id: "+userId)));
+		return user;
 	}
 	
 	@PostMapping("/auth/signup")

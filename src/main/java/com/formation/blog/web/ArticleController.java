@@ -29,6 +29,41 @@ public class ArticleController {
 		return articleService.getArticles();
 	}
 	
+	@GetMapping("/article/{articleId}")
+	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) {
+		Optional<Article> article = Optional.ofNullable(articleService.findArticleById(articleId)
+				.orElseThrow(() -> new EntityNotFoundException("article not found with id: "+articleId)));	
+		return article;
+	}
+	
+	@GetMapping("/articles/author/{articleAuthor}")
+	public Collection<Article> getArticlesByAuthor(@PathVariable("articleAuthor") String articleAuthor) {
+		Collection<Article> articles = articleService.findArticleByAuthor(articleAuthor);
+		return articles;
+	}
+	
+	@PutMapping("/articles/{articleId}")
+	public Optional<Article> updateArticleContent(@PathVariable("articleId") int articleId, @RequestBody String content) {
+		articleService.updateArticleContent(content, articleId);
+		Optional<Article> updatedArticle = Optional.ofNullable(articleService.findArticleById(articleId)
+				.orElseThrow(() -> new EntityNotFoundException("Unable to update article content, it was not found with id: "+articleId)));
+		return updatedArticle;
+	}
+	
+	@PostMapping("/articles/new")
+	public void createArticle(@RequestBody Article article) {
+		articleService.createArticle(article);
+	}
+	
+	@DeleteMapping("/articles/{articleId}")
+	public Optional<Article> deleteArticleById(@PathVariable("articleId") int articleId) {
+		Optional<Article> deletedArticle = Optional.ofNullable(articleService.findArticleById(articleId)
+				.orElseThrow(() -> new EntityNotFoundException("Unable to delete this article, it was not found with id: "+articleId)));
+		articleService.deleteArticleById(articleId);
+		return deletedArticle;
+	}
+	
+	
 //	@GetMapping("/article/{articleId}")
 //	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) {
 //		Optional<Article> article = articleService.findArticleById(articleId);
@@ -52,37 +87,6 @@ public class ArticleController {
 //				.orElseThrow(() -> new ArticleNotFoundException(articleId));	
 //		return new ResponseEntity<>(article, HttpStatus.OK);
 //	}
-	
-	@GetMapping("/article/{articleId}")
-	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) {
-		Optional<Article> article = Optional.ofNullable(articleService.findArticleById(articleId)
-				.orElseThrow(() -> new EntityNotFoundException("article not found with id: "+articleId)));	
-		return article;
-	}
-	
-	@GetMapping("/articles/author/{articleAuthor}")
-	public Collection<Article> getArticlesByAuthor(@PathVariable("articleAuthor") String articleAuthor) {
-		Collection<Article> articles = articleService.findArticleByAuthor(articleAuthor);
-		return articles;
-	}
-	
-	@PutMapping("/articles/{articleId}")
-	public void updateArticleContent(@PathVariable("articleId") int articleId, @RequestBody String content) {
-		Optional.ofNullable(articleService.findArticleById(articleId)
-				.orElseThrow(() -> new EntityNotFoundException("article not found with id: "+articleId)));
-		articleService.updateArticleContent(content, articleId);
-	}
-	
-	@PostMapping("/articles/new")
-	public void createArticle(@RequestBody Article article) {
-		articleService.createArticle(article);
-	}
-	
-	@DeleteMapping("/articles/{articleId}")
-	public void deleteArticleById(@PathVariable("articleId") int articleId) {
-		articleService.deleteArticleById(articleId);
-	}
-	
 
 	
 }
