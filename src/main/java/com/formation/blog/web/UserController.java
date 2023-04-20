@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.blog.exceptions.EntityNotFoundException;
+import com.formation.blog.exceptions.UserAlreadyExistException;
 import com.formation.blog.model.User;
 import com.formation.blog.service.UserService;
-import com.formation.blog.util.ResponseTransfer;
 
 @RestController
 public class UserController {
@@ -36,7 +37,7 @@ public class UserController {
 	
 	@PostMapping("/auth/signup")
 	@ResponseBody
-	public ResponseTransfer signUp(@RequestBody User user) {
+	public ResponseEntity<User> signUp(@RequestBody User user) throws UserAlreadyExistException {
 		return userService.signUp(user);
 	}
 }

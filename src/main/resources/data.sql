@@ -1,3 +1,9 @@
+ALTER TABLE userdata
+ADD UNIQUE (username); 
+ALTER TABLE userdata
+ADD UNIQUE (email); 
+
+
 
 INSERT INTO article (name, content, author) VALUES ('article name', 'I am an article and this is the content', 'John');
 INSERT INTO article (name, content, author) VALUES ('car article', 'I am an article and this is the content', 'John');

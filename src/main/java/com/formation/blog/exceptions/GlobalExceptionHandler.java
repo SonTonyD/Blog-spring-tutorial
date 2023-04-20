@@ -22,4 +22,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		String bodyOfResponse = "This should be application specific";
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
 	}
+	
+	@ExceptionHandler(value = {UserAlreadyExistException.class})
+	protected ResponseEntity<Object> handleUserAlreadyExistException(Exception ex, WebRequest request) {
+		String bodyOfResponse = ex.getMessage();
+		return new ResponseEntity<> (bodyOfResponse ,new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
+	}
 }
