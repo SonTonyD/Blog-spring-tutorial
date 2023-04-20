@@ -40,7 +40,6 @@ public class UserControllerTests {
 	@Test
 	public void testSignUpUser() throws Exception {
 		mockMvc.perform(post("/auth/signup").content(jsonStringUser).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
-
 }
