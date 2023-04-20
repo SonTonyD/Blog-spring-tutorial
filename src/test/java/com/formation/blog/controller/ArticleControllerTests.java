@@ -1,6 +1,7 @@
 package com.formation.blog.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -10,10 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.formation.blog.model.Article;
 import com.formation.blog.service.ArticleService;
 import com.formation.blog.web.ArticleController;
 
@@ -23,6 +21,8 @@ public class ArticleControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
+
+	String jsonStringArticle = "{\"name\":\"Louis Article\",\"author\":\"Louis\",\"content\":\"Article about Japan\"}";
 
 	@MockBean
 	private ArticleService articleService;
@@ -34,11 +34,18 @@ public class ArticleControllerTests {
 
 	@Test
 	public void testGetArticleById() throws Exception {
-		mockMvc.perform(get("/article/1")).andExpect(status().isNotFound());
+		mockMvc.perform(get("/article/" + 1)).andExpect(status().isNotFound());
 	}
 
 	@Test
 	public void testGetArticlesByAuthor() throws Exception {
 		mockMvc.perform(get("/articles/author/Bob")).andExpect(status().isOk());
 	}
+
+	@Test
+	public void testCreateArticle() throws Exception {
+		mockMvc.perform(post("/articles/new").content(jsonStringArticle).contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+	}
+
 }
