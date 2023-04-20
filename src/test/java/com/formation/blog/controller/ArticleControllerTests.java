@@ -1,7 +1,9 @@
 package com.formation.blog.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -46,6 +48,16 @@ public class ArticleControllerTests {
 	public void testCreateArticle() throws Exception {
 		mockMvc.perform(post("/articles/new").content(jsonStringArticle).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+	}
+
+	@Test
+	public void testUpdateArticleContent() throws Exception {
+		mockMvc.perform(put("/articles/"+2).content("NEW CONTENT")).andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void testDeleteArticleById() throws Exception {
+		mockMvc.perform(delete("/articles/"+1)).andExpect(status().isNotFound());
 	}
 
 }

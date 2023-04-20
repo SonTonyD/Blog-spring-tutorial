@@ -32,10 +32,10 @@ public class ArticleController {
 	}
 	
 	@GetMapping("/article/{articleId}")
-	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) {
+	public ResponseEntity<Optional<Article>> getArticleById(@PathVariable("articleId") int articleId) {
 		Optional<Article> article = Optional.ofNullable(articleService.findArticleById(articleId)
 				.orElseThrow(() -> new EntityNotFoundException("article not found with id: "+articleId)));	
-		return article;
+		return new ResponseEntity<>(article, HttpStatus.OK);
 	}
 	
 	@GetMapping("/articles/author/{articleAuthor}")
