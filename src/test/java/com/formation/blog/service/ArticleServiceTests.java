@@ -12,20 +12,18 @@
 //import com.formation.blog.web.ArticleController;
 //
 //@WebMvcTest(controllers = ArticleController.class)
-//public class BlogServiceTests {
+//public class ArticleServiceTests {
 //	
 //	@Autowired
 //    private MockMvc mockMvc;
 //
 //    @MockBean
 //    private ArticleService articleService;
-//
+//    
 //    @Test
 //    public void testGetArticles() throws Exception {
 //        mockMvc.perform(get("/articles"))
 //            .andExpect(status().isOk());
 //    }
-//    
-//
 //
 //}
