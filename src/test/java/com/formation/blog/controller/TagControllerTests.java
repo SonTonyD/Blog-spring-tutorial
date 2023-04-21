@@ -24,6 +24,7 @@ public class TagControllerTests {
 	private MockMvc mockMvc;
 
 	String jsonStringTag = "{\"name\":\"Science\"}";
+	private static final int TEST_ARTICLE_ID = 1;
 	
 	@MockBean
 	private TagService tagService;
@@ -37,6 +38,11 @@ public class TagControllerTests {
 	public void testCreateTag() throws Exception {
 		mockMvc.perform(post("/tags/new").content(jsonStringTag).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+	}
+	
+	@Test
+	public void testGetArticleTags() throws Exception {
+		mockMvc.perform(get("/tags/article/"+TEST_ARTICLE_ID)).andExpect(status().isOk());
 	}
 	
 	

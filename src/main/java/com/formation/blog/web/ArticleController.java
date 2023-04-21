@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.blog.exceptions.EntityNotFoundException;
 import com.formation.blog.model.Article;
-import com.formation.blog.model.Tag;
 import com.formation.blog.service.ArticleService;
 
 
@@ -34,8 +33,7 @@ public class ArticleController {
 	
 	@GetMapping("/article/{articleId}")
 	public ResponseEntity<Optional<Article>> getArticleById(@PathVariable("articleId") int articleId) {
-		Optional<Article> article = Optional.ofNullable(articleService.findArticleById(articleId)
-				.orElseThrow(() -> new EntityNotFoundException("article not found with id: "+articleId)));	
+		Optional<Article> article = articleService.findArticleById(articleId);
 		return new ResponseEntity<>(article, HttpStatus.OK);
 	}
 	
@@ -45,17 +43,9 @@ public class ArticleController {
 		return articles;
 	}
 	
-	@GetMapping("/articles/tags/{articleId}")
-	public Collection<Tag> getArticlesByAuthor(@PathVariable("articleId") int articleId) {
-		Collection<Tag> tags = articleService.findTags(articleId);
-		return tags;
-	}
-	
 	@PutMapping("/articles/{articleId}")
 	public Optional<Article> updateArticleContent(@PathVariable("articleId") int articleId, @RequestBody String content) {
-		articleService.updateArticleContent(content, articleId);
-		Optional<Article> updatedArticle = Optional.ofNullable(articleService.findArticleById(articleId)
-				.orElseThrow(() -> new EntityNotFoundException("Unable to update article content, it was not found with id: "+articleId)));
+		Optional<Article> updatedArticle = articleService.updateArticleContent(content, articleId);
 		return updatedArticle;
 	}
 	

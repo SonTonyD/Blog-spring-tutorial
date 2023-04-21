@@ -28,5 +28,10 @@ public class TagService {
 	public void createTag(Tag tag) {
 		springDataTagRepository.save(tag);
 	}
+	
+	@Transactional
+	public Collection<Tag> getArticleTags(int articleId) {
+		return springDataTagRepository.findTags(articleId);
+	}
 
 }

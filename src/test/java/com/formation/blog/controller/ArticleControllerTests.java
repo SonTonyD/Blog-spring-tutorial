@@ -39,7 +39,7 @@ public class ArticleControllerTests {
 
 	@Test
 	public void testGetArticleById() throws Exception {
-		mockMvc.perform(get("/article/" + TEST_ARTICLE_ID)).andExpect(status().isNotFound());
+		mockMvc.perform(get("/article/" + TEST_ARTICLE_ID)).andExpect(status().isOk());
 	}
 
 	@Test
@@ -55,17 +55,12 @@ public class ArticleControllerTests {
 
 	@Test
 	public void testUpdateArticleContent() throws Exception {
-		mockMvc.perform(put("/articles/"+TEST_ARTICLE_ID).content("NEW CONTENT")).andExpect(status().isNotFound());
+		mockMvc.perform(put("/articles/"+TEST_ARTICLE_ID).content("NEW CONTENT")).andExpect(status().isOk());
 	}
 	
 	@Test
 	public void testDeleteArticleById() throws Exception {
 		mockMvc.perform(delete("/articles/"+TEST_ARTICLE_ID)).andExpect(status().isNotFound());
-	}
-	
-	@Test
-	public void testGetArticleTags() throws Exception {
-		mockMvc.perform(get("/articles/tags/"+TEST_ARTICLE_ID)).andExpect(status().isOk());
 	}
 
 }
