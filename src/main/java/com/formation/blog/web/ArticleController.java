@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.formation.blog.exceptions.EntityNotFoundException;
 import com.formation.blog.model.Article;
+import com.formation.blog.model.Tag;
 import com.formation.blog.service.ArticleService;
 
 
@@ -42,6 +43,12 @@ public class ArticleController {
 	public Collection<Article> getArticlesByAuthor(@PathVariable("articleAuthor") String articleAuthor) {
 		Collection<Article> articles = articleService.findArticleByAuthor(articleAuthor);
 		return articles;
+	}
+	
+	@GetMapping("/articles/tags/{articleId}")
+	public Collection<Tag> getArticlesByAuthor(@PathVariable("articleId") int articleId) {
+		Collection<Tag> tags = articleService.findTags(articleId);
+		return tags;
 	}
 	
 	@PutMapping("/articles/{articleId}")

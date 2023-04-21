@@ -8,8 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.formation.blog.model.Article;
+import com.formation.blog.model.Tag;
 
 public interface SpringDataArticleRepository extends JpaRepository<Article, Integer> {
+	
+	@Query(value = "SELECT tags FROM Article WHERE id =:id", nativeQuery = true)
+	public Collection<Tag> findTags(@Param("id") int id);
 
 	@Query(value = "SELECT * FROM Article WHERE author =:author", nativeQuery = true)
 	public Collection<Article> findByAuthor(@Param("author") String author);

@@ -2,6 +2,7 @@ package com.formation.blog.model;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -18,39 +21,26 @@ import jakarta.persistence.Table;
 public class Article {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
-	
+	protected Integer id;
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "author")
 	private String author;
 
 	@Column(name = "content")
 	private String content;
-	
+
 	@Column(name = "reviews")
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "article_id")
 	private List<Review> reviews;
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(author, content, name, reviews);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Article other = (Article) obj;
-		return Objects.equals(author, other.author) && Objects.equals(content, other.content)
-				&& Objects.equals(name, other.name) && Objects.equals(reviews, other.reviews);
-	}
+	@Column(name = "tags")
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "have_tag", joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+	private Set<Tag> tags;
 
 	public Integer getId() {
 		return id;
@@ -91,7 +81,39 @@ public class Article {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
-	
 
-    
+	public Set<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(author, content, name, reviews, tags);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Article other = (Article) obj;
+		return Objects.equals(author, other.author) && Objects.equals(content, other.content)
+				&& Objects.equals(name, other.name) && Objects.equals(reviews, other.reviews)
+				&& Objects.equals(tags, other.tags);
+	}
+
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", name=" + name + ", author=" + author + ", content=" + content + ", reviews="
+				+ reviews + ", tags=" + tags + "]";
+	}
+
+	
 }

@@ -20,3 +20,5 @@ INSERT INTO review (content, author, article_id) VALUES ('Good !', 'David', 1);
 
 INSERT INTO userdata (username, email, password) VALUES ('Henry55','Henry55@gmail.com','h4d8f4s8f4');
 INSERT INTO userdata (username, email, password) VALUES ('Thierry14','Thierry1452@gmail.com','etu9i6od17');
+
+INSERT INTO tag (name) VALUES ('Car');

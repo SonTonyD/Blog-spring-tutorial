@@ -8,18 +8,21 @@ import com.formation.blog.repository.springdatajpa.SpringDataUserRepository;
 
 public class BlogService {
 	
-	private SpringDataArticleRepository springDataArticleRepository;
-	private SpringDataReviewRepository springDataReviewRepository;
-	private SpringDataUserRepository springDataUserRepository;
+	private ArticleService articleService;
+	private ReviewService reviewService;
+	private UserService userService;
+	private TagService tagService;
 	
 	@Autowired
-	public BlogService(SpringDataArticleRepository articleRepository,
-			SpringDataReviewRepository reviewRepository,
-			SpringDataUserRepository userRepository) 
+	public BlogService(ArticleService articleService,
+			ReviewService reviewService,
+			UserService userService,
+			TagService tagService) 
 	{
-		this.springDataArticleRepository = articleRepository;
-		this.springDataReviewRepository = reviewRepository;
-		this.springDataUserRepository = userRepository;
+		this.articleService = articleService;
+		this.reviewService = reviewService;
+		this.userService = userService;
+		this.tagService = tagService;
 	}
 
 }
