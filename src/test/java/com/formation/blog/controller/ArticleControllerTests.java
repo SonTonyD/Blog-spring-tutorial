@@ -60,7 +60,7 @@ public class ArticleControllerTests {
 	
 	@Test
 	public void testDeleteArticleById() throws Exception {
-		mockMvc.perform(delete("/articles/"+TEST_ARTICLE_ID)).andExpect(status().isNotFound());
+		mockMvc.perform(delete("/articles/"+TEST_ARTICLE_ID)).andExpect(status().isOk());
 	}
 
 }

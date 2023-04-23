@@ -57,9 +57,7 @@ public class ArticleController {
 	
 	@DeleteMapping("/articles/{articleId}")
 	public Optional<Article> deleteArticleById(@PathVariable("articleId") int articleId) {
-		Optional<Article> deletedArticle = Optional.ofNullable(articleService.findArticleById(articleId)
-				.orElseThrow(() -> new EntityNotFoundException("Unable to delete this article, it was not found with id: "+articleId)));
-		articleService.deleteArticleById(articleId);
+		Optional<Article> deletedArticle = articleService.deleteArticleById(articleId);
 		return deletedArticle;
 	}
 	
