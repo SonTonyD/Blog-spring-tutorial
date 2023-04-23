@@ -34,7 +34,7 @@ public class UserControllerTests {
 	
 	@Test
 	public void testGetUserById() throws Exception {
-		mockMvc.perform(get("/users/" + 1)).andExpect(status().isNotFound());
+		mockMvc.perform(get("/users/" + 1)).andExpect(status().isOk());
 	}
 	
 	@Test

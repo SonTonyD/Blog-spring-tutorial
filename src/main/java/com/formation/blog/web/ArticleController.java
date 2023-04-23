@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formation.blog.exceptions.EntityNotFoundException;
 import com.formation.blog.model.Article;
 import com.formation.blog.service.ArticleService;
 

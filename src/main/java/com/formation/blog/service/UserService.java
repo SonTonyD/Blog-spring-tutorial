@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.formation.blog.exceptions.EntityNotFoundException;
 import com.formation.blog.exceptions.UserAlreadyExistException;
 import com.formation.blog.model.User;
 import com.formation.blog.repository.springdatajpa.SpringDataUserRepository;
@@ -30,7 +31,9 @@ public class UserService {
 
 	@Transactional
 	public Optional<User> getUserById(int userId) {
-		return springDataUserRepository.findById(userId);
+		Optional<User> user = springDataUserRepository.findById(userId);
+		return Optional
+				.ofNullable(user.orElseThrow(() -> new EntityNotFoundException("article not found with id: " + userId)));
 	}
 
 	@Transactional
