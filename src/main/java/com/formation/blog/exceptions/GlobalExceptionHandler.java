@@ -23,4 +23,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		String bodyOfResponse = "UserAlreadyExistException: "+ex.getMessage();
 		return new ResponseEntity<> (bodyOfResponse ,new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
 	}
+	
+	@ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class })
+	protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
+		String bodyOfResponse = "This should be application specific";
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
+	}
 }

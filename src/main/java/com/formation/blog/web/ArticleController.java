@@ -60,30 +60,6 @@ public class ArticleController {
 		return deletedArticle;
 	}
 	
-	
-//	@GetMapping("/article/{articleId}")
-//	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) {
-//		Optional<Article> article = articleService.findArticleById(articleId);
-//		return Optional.ofNullable(article.orElseThrow(() -> new EntityNotFoundException("article not found")));
-//	}
-	
-//	@GetMapping("/article/{articleId}")
-//	public Optional<Article> getArticleById(@PathVariable("articleId") int articleId) throws EntityNotFoundException{
-//		Optional<Article> article = articleService.findArticleById(articleId);
-//		
-//		if (article.isEmpty()) {
-//			throw new EntityNotFoundException("article is not found");
-//		}
-//		
-//		return article;
-//	}
-	
-//	@GetMapping("/article/{articleId}")
-//	public ResponseEntity<Article> getArticleById(@PathVariable("articleId") int articleId) throws ArticleNotFoundException {
-//		Article article = articleService.findArticleById(articleId)
-//				.orElseThrow(() -> new ArticleNotFoundException(articleId));	
-//		return new ResponseEntity<>(article, HttpStatus.OK);
-//	}
 
 	
 }

@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,13 +36,15 @@ public class Article {
 	private String content;
 
 	@Column(name = "reviews")
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "article_id")
+	@JsonIgnore
 	private List<Review> reviews;
 
 	@Column(name = "tags")
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "have_tag", joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+	@JsonIgnore
 	private Set<Tag> tags;
 
 	public Integer getId() {
@@ -81,7 +86,7 @@ public class Article {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
-
+	
 	public Set<Tag> getTags() {
 		return tags;
 	}
