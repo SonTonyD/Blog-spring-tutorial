@@ -31,7 +31,7 @@ public class TagService {
 	
 	@Transactional
 	public Collection<Tag> getArticleTags(int articleId) {
-		return springDataTagRepository.findTags(articleId);
+		return springDataTagRepository.findTagsById(articleId);
 	}
 
 }

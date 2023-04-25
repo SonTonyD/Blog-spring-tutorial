@@ -25,29 +25,6 @@ public class Review {
 	@Column(name = "article_id")
 	private int articleId;
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(articleId, author, content, id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Review other = (Review) obj;
-		return articleId == other.articleId && Objects.equals(author, other.author)
-				&& Objects.equals(content, other.content) && Objects.equals(id, other.id);
-	}
-
-	@Override
-	public String toString() {
-		return "Review [id=" + id + ", author=" + author + ", content=" + content + ", article_id=" + articleId + "]";
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -80,4 +57,25 @@ public class Review {
 		this.articleId = articleId;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(articleId, author, content, id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Review other = (Review) obj;
+		return articleId == other.articleId && Objects.equals(author, other.author)
+				&& Objects.equals(content, other.content) && Objects.equals(id, other.id);
+	}
+	
+	
+	
+	
 }

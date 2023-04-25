@@ -25,7 +25,7 @@ public class TagController {
 		return tagService.getTags();
 	}
 	
-	@GetMapping("/tags/article/{articleId}")
+	@GetMapping("/articles/{articleId}/tags")
 	public Collection<Tag> getArticles(@PathVariable("articleId") int articleId) {
 		return tagService.getArticleTags(articleId);
 	}

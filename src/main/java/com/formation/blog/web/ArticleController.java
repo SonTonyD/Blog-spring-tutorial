@@ -30,7 +30,7 @@ public class ArticleController {
 		return articleService.getArticles();
 	}
 	
-	@GetMapping("/article/{articleId}")
+	@GetMapping("/articles/{articleId}")
 	public ResponseEntity<Optional<Article>> getArticleById(@PathVariable("articleId") int articleId) {
 		Optional<Article> article = articleService.findArticleById(articleId);
 		return new ResponseEntity<>(article, HttpStatus.OK);

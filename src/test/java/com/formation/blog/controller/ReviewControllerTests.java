@@ -21,22 +21,23 @@ public class ReviewControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+	private static final int TEST_ARTICLE_ID = 1;
+
 	String jsonStringReview = "{\"author\":\"Louis\",\"content\":\"Very good article !\",\"articleId\":\"3\"}";
 
 	@MockBean
 	private ReviewService reviewService;
-	
+
 	@Test
 	public void testGetReviews() throws Exception {
 		mockMvc.perform(get("/reviews")).andExpect(status().isOk());
 	}
-	
+
 	@Test
 	public void testGetReviewsOfArticle() throws Exception {
-		mockMvc.perform(get("/reviews/article/"+1)).andExpect(status().isOk());
+		mockMvc.perform(get("/articles/" + TEST_ARTICLE_ID + "/reviews")).andExpect(status().isOk());
 	}
-	
+
 	@Test
 	public void testCreateReview() throws Exception {
 		mockMvc.perform(post("/review/new").content(jsonStringReview).contentType(MediaType.APPLICATION_JSON)

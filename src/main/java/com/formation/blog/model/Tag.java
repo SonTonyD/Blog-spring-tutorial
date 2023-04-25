@@ -3,6 +3,8 @@ package com.formation.blog.model;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,30 +26,8 @@ public class Tag {
 	
 	@Column(name = "articles")
 	@ManyToMany(mappedBy = "tags")
+	@JsonIgnore
 	private Set<Article> articles;
-
-	@Override
-	public String toString() {
-		return "Tag [id=" + id + ", name=" + name + ", articles=" + articles + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(articles, id, name);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Tag other = (Tag) obj;
-		return Objects.equals(articles, other.articles) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name);
-	}
 
 	public Integer getId() {
 		return id;
@@ -73,6 +53,24 @@ public class Tag {
 		this.articles = articles;
 	}
 
-	
+	@Override
+	public int hashCode() {
+		return Objects.hash(articles, id, name);
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Tag other = (Tag) obj;
+		return Objects.equals(articles, other.articles) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name);
+	}
+	
+	
+	
 }

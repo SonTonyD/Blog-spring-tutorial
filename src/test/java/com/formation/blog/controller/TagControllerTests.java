@@ -1,6 +1,7 @@
 package com.formation.blog.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -18,33 +19,39 @@ import com.formation.blog.web.TagController;
 @AutoConfigureMockMvc
 @WebMvcTest(controllers = TagController.class)
 public class TagControllerTests {
-	
-	
+
 	@Autowired
 	private MockMvc mockMvc;
 
 	String jsonStringTag = "{\"name\":\"Science\"}";
-	private static final int TEST_ARTICLE_ID = 1;
 	
+	String jsonListTags = "[{\"name\":\"Science\"},{\"name\":\"Mechanics\"},{\"name\":\"Physics\"}]";
+	
+	private static final int TEST_ARTICLE_ID = 1;
+
 	@MockBean
 	private TagService tagService;
-	
+
 	@Test
 	public void testGetTags() throws Exception {
 		mockMvc.perform(get("/tags")).andExpect(status().isOk());
 	}
-	
+
 	@Test
 	public void testCreateTag() throws Exception {
 		mockMvc.perform(post("/tags/new").content(jsonStringTag).contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
 	}
-	
+
 	@Test
 	public void testGetArticleTags() throws Exception {
-		mockMvc.perform(get("/tags/article/"+TEST_ARTICLE_ID)).andExpect(status().isOk());
+		mockMvc.perform(get("/articles/" + TEST_ARTICLE_ID + "/tags")).andExpect(status().isOk());
 	}
-	
-	
-	
+
+	@Test
+	public void addTagsToArticle() throws Exception {
+		mockMvc.perform(patch("/articles/" + TEST_ARTICLE_ID + "/tags/add")
+				.contentType(MediaType.APPLICATION_JSON_VALUE).content(jsonListTags)).andExpect(status().isOk());
+	}
+
 }

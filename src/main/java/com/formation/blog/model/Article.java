@@ -2,7 +2,6 @@ package com.formation.blog.model;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -37,15 +36,15 @@ public class Article {
 
 	@Column(name = "reviews")
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JoinColumn(name = "article_id")
+	@JoinColumn(name = "articleid")
 	@JsonIgnore
 	private List<Review> reviews;
 
 	@Column(name = "tags")
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "have_tag", joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+	@JoinTable(name = "have_tag", joinColumns = @JoinColumn(name = "articleid"), inverseJoinColumns = @JoinColumn(name = "tagid"))
 	@JsonIgnore
-	private Set<Tag> tags;
+	private List<Tag> tags;
 
 	public Integer getId() {
 		return id;
@@ -86,18 +85,18 @@ public class Article {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
-	
-	public Set<Tag> getTags() {
+
+	public List<Tag> getTags() {
 		return tags;
 	}
 
-	public void setTags(Set<Tag> tags) {
+	public void setTags(List<Tag> tags) {
 		this.tags = tags;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(author, content, name, reviews, tags);
+		return Objects.hash(author, content, id, name, reviews, tags);
 	}
 
 	@Override
@@ -110,15 +109,9 @@ public class Article {
 			return false;
 		Article other = (Article) obj;
 		return Objects.equals(author, other.author) && Objects.equals(content, other.content)
-				&& Objects.equals(name, other.name) && Objects.equals(reviews, other.reviews)
-				&& Objects.equals(tags, other.tags);
-	}
-
-	@Override
-	public String toString() {
-		return "Article [id=" + id + ", name=" + name + ", author=" + author + ", content=" + content + ", reviews="
-				+ reviews + ", tags=" + tags + "]";
-	}
-
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Objects.equals(reviews, other.reviews) && Objects.equals(tags, other.tags);
+	}	
+	
 	
 }

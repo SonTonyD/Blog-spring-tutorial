@@ -1,10 +1,3 @@
-ALTER TABLE userdata
-ADD UNIQUE (username); 
-ALTER TABLE userdata
-ADD UNIQUE (email); 
-
-
-
 INSERT INTO article (name, content, author) VALUES ('article name', 'I am an article and this is the content', 'John');
 INSERT INTO article (name, content, author) VALUES ('car article', 'I am an article and this is the content', 'John');
 INSERT INTO article (name, content, author) VALUES ('plane article', 'I am an article and this is the content', 'John');
@@ -22,3 +15,8 @@ INSERT INTO userdata (username, email, password) VALUES ('Henry55','Henry55@gmai
 INSERT INTO userdata (username, email, password) VALUES ('Thierry14','Thierry1452@gmail.com','etu9i6od17');
 
 INSERT INTO tag (name) VALUES ('Car');
+INSERT INTO tag (name) VALUES ('Science');
+INSERT INTO tag (name) VALUES ('Mechanics');
+INSERT INTO tag (name) VALUES ('Physics');
+
+INSERT INTO have_tag (articleid, tagid) VALUES (1,1);

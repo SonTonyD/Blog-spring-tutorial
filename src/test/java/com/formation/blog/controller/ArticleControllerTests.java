@@ -39,7 +39,7 @@ public class ArticleControllerTests {
 
 	@Test
 	public void testGetArticleById() throws Exception {
-		mockMvc.perform(get("/article/" + TEST_ARTICLE_ID)).andExpect(status().isOk());
+		mockMvc.perform(get("/articles/" + TEST_ARTICLE_ID)).andExpect(status().isOk());
 	}
 
 	@Test

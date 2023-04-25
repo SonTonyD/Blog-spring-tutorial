@@ -8,8 +8,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "userdata")
 public class User {
 	@Id
@@ -24,7 +26,6 @@ public class User {
 
 	@Column(name = "password")
 	private String password;
-	
 
 	public Integer getId() {
 		return id;
@@ -42,25 +43,20 @@ public class User {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + "]";
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
@@ -81,5 +77,7 @@ public class User {
 				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 	
+	
+
 	
 }

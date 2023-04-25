@@ -25,7 +25,7 @@ public class ReviewController {
 		return reviewService.getReviews();
 	}
 	
-	@GetMapping("/reviews/article/{articleId}")
+	@GetMapping("/articles/{articleId}/reviews")
 	public Collection<Review> getReviewsOfArticle(@PathVariable("articleId") int articleId) {
 		return reviewService.getReviewsOfArticle(articleId);
 	}
