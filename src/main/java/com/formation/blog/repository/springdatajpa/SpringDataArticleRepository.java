@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.formation.blog.model.Article;
+import com.formation.blog.model.Tag;
 
 @RepositoryRestResource
 public interface SpringDataArticleRepository extends JpaRepository<Article, Integer> {
@@ -20,4 +21,5 @@ public interface SpringDataArticleRepository extends JpaRepository<Article, Inte
 	@Query(value = "UPDATE Article SET Article.content=:newContent WHERE id =:id", nativeQuery = true)
 	public void updateContent(@Param("newContent") String newContent, @Param("id") int id);
 	
+	public Collection<Tag> findTagsById(int articleid);
 }

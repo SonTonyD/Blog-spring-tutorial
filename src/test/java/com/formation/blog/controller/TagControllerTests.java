@@ -1,7 +1,6 @@
 package com.formation.blog.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,7 +24,9 @@ public class TagControllerTests {
 
 	String jsonStringTag = "{\"name\":\"Science\"}";
 	
-	String jsonListTags = "[{\"name\":\"Science\"},{\"name\":\"Mechanics\"},{\"name\":\"Physics\"}]";
+	String jsonListTags = "[{\"articleid\":\"1\", \"tagid\":\"2\"},{\"articleid\":\"1\", \"tagid\":\"3\"}]";
+	
+	
 	
 	private static final int TEST_ARTICLE_ID = 1;
 
@@ -50,7 +51,7 @@ public class TagControllerTests {
 
 	@Test
 	public void addTagsToArticle() throws Exception {
-		mockMvc.perform(patch("/articles/" + TEST_ARTICLE_ID + "/tags/add")
+		mockMvc.perform(post("/articles/" + TEST_ARTICLE_ID + "/tags/add")
 				.contentType(MediaType.APPLICATION_JSON_VALUE).content(jsonListTags)).andExpect(status().isOk());
 	}
 

@@ -3,8 +3,6 @@ package com.formation.blog.model;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,14 +34,12 @@ public class Article {
 
 	@Column(name = "reviews")
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	@JoinColumn(name = "articleid")
-	@JsonIgnore
+	@JoinColumn(name = "article_id")
 	private List<Review> reviews;
 
 	@Column(name = "tags")
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "have_tag", joinColumns = @JoinColumn(name = "articleid"), inverseJoinColumns = @JoinColumn(name = "tagid"))
-	@JsonIgnore
 	private List<Tag> tags;
 
 	public Integer getId() {
