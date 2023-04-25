@@ -1,3 +1,6 @@
+ALTER TABLE have_tag
+ADD CONSTRAINT UC_have_tag UNIQUE (articleid, tagid); 
+
 INSERT INTO article (name, content, author) VALUES ('article name', 'I am an article and this is the content', 'John');
 INSERT INTO article (name, content, author) VALUES ('car article', 'I am an article and this is the content', 'John');
 INSERT INTO article (name, content, author) VALUES ('plane article', 'I am an article and this is the content', 'John');

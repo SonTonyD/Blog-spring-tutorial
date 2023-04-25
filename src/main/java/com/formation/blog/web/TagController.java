@@ -36,13 +36,9 @@ public class TagController {
 		return new ResponseEntity<>(tag, HttpStatus.CREATED);
 	}
 	
-//	@PostMapping("/articles/{articleId}/tags/add")
-//	public void addTagsToArticle(@PathVariable("articleId") int articleId, @RequestBody Collection<Tag> tags) {
-//		tagService.addTagsToArticle(articleId, tags);
-//	}
-	
 	@PostMapping("/articles/{articleId}/tags/add")
-	public void addTagsToArticle(@PathVariable("articleId") int articleId, @RequestBody Collection<Tag> tags) {
+	public ResponseEntity<Collection<Tag>> addTagsToArticle(@PathVariable("articleId") int articleId, @RequestBody Collection<Tag> tags) {
 		tagService.addTagsToArticle(articleId, tags);
+		return new ResponseEntity<>(tags, HttpStatus.OK);
 	}
 }

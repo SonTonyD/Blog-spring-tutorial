@@ -16,7 +16,7 @@ import jakarta.persistence.PersistenceContext;
 public class TagService {
 
 	private SpringDataTagRepository springDataTagRepository;
-	
+
 	@PersistenceContext
 	EntityManager entityManager;
 
@@ -59,19 +59,19 @@ public class TagService {
 	public void addTagsToArticle(int articleId, Collection<Tag> tags) {
 		String sqlRequest = "INSERT INTO HAVE_TAG (articleid, tagid) VALUES";
 		int tagId = -1;
-		
+		int counter = 0;
+
 		for (Tag tag : tags) {
 			
-			if (tagId != -1) {
-				tagId = springDataTagRepository.findIdByName(tag.getName());
+			tagId = springDataTagRepository.findIdByName(tag.getName());
+			
+			if (counter != 0) {
 				sqlRequest += ", (" + articleId + "," + tagId + ")";
-			}
-			else {
-				tagId = springDataTagRepository.findIdByName(tag.getName());
+			} else {
 				sqlRequest += "(" + articleId + "," + tagId + ")";
 			}
+			counter += 1;
 		}
-
 		entityManager.createNativeQuery(sqlRequest).executeUpdate();
 	}
 
