@@ -1,6 +1,7 @@
 package com.formation.blog.service;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,39 +40,20 @@ public class TagService {
 	public Collection<Tag> getArticleTags(int articleId) {
 		return springDataTagRepository.findTagsById(articleId);
 	}
-
-//	@Transactional
-//	public void addTagsToArticle(int articleId, Collection<Tag> tags) {
-//		int tagId = 0;
-//		for (Tag tag : tags) {
-//			tagId = springDataTagRepository.findIdByName(tag.getName());
-//			springDataTagRepository.addTagsToArticle(articleId, tagId);
-//		}
-//	}
-
-//	@Transactional
-//	public void addTagsToArticle(int articleId, Tag tag) {
-//		int tagId = springDataTagRepository.findIdByName(tag.getName());
-//		springDataTagRepository.addTagsToArticle(articleId, tagId);
-//	}
-
+	
 	@Transactional
 	public void addTagsToArticle(int articleId, Collection<Tag> tags) {
-		String sqlRequest = "INSERT INTO HAVE_TAG (articleid, tagid) VALUES";
-		int tagId = -1;
-		int counter = 0;
+		String sqlRequest = "INSERT INTO HAVE_TAG (articleid, tagid) VALUES ";
 
-		for (Tag tag : tags) {
-			
-			tagId = springDataTagRepository.findIdByName(tag.getName());
-			
-			if (counter != 0) {
-				sqlRequest += ", (" + articleId + "," + tagId + ")";
-			} else {
-				sqlRequest += "(" + articleId + "," + tagId + ")";
-			}
-			counter += 1;
-		}
+		String sqlValues = tags.stream()
+		    .map(tag -> {
+		        int tagId = springDataTagRepository.findIdByName(tag.getName());
+		        return "(" + articleId + ", " + tagId + ")";
+		    })
+		    .collect(Collectors.joining(", "));
+
+		sqlRequest += sqlValues;
+
 		entityManager.createNativeQuery(sqlRequest).executeUpdate();
 	}
 

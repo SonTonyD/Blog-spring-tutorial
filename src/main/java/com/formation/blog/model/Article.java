@@ -19,6 +19,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "article")
 public class Article {
+	
+	public Article() {
+		super();
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
@@ -107,7 +112,9 @@ public class Article {
 		return Objects.equals(author, other.author) && Objects.equals(content, other.content)
 				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
 				&& Objects.equals(reviews, other.reviews) && Objects.equals(tags, other.tags);
-	}	
+	}
+	
+	
 	
 	
 }
