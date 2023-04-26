@@ -74,6 +74,10 @@ public class Review {
 		return articleId == other.articleId && Objects.equals(author, other.author)
 				&& Objects.equals(content, other.content) && Objects.equals(id, other.id);
 	}
+
+	public Review() {
+		super();
+	}
 	
 	
 	

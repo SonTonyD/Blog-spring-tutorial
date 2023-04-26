@@ -4,6 +4,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.formation.blog.model.Article;
 import com.formation.blog.service.ArticleService;
 import com.formation.blog.web.ArticleController;
 
@@ -23,9 +26,8 @@ public class ArticleControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	private static final int TEST_ARTICLE_ID = 1;
-	
 
 	String jsonStringArticle = "{\"name\":\"Louis Article\",\"author\":\"Louis\",\"content\":\"Article about Japan\"}";
 
@@ -49,18 +51,25 @@ public class ArticleControllerTests {
 
 	@Test
 	public void testCreateArticle() throws Exception {
+		Article article = new Article();
+		article.setId(TEST_ARTICLE_ID);
+		article.setName("Louis Article");
+		article.setAuthor("Louis");
+		article.setContent("Article about Japan");
+
 		mockMvc.perform(post("/articles/new").content(jsonStringArticle).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated()).equals(article);
 	}
 
 	@Test
 	public void testUpdateArticleContent() throws Exception {
-		mockMvc.perform(put("/articles/"+TEST_ARTICLE_ID).content("NEW CONTENT")).andExpect(status().isOk());
+		mockMvc.perform(put("/articles/" + TEST_ARTICLE_ID).content("NEW CONTENT")).andExpect(status().isOk())
+				.equals("NEW CONTENT");
 	}
-	
+
 	@Test
 	public void testDeleteArticleById() throws Exception {
-		mockMvc.perform(delete("/articles/"+TEST_ARTICLE_ID)).andExpect(status().isOk());
+		mockMvc.perform(delete("/articles/" + TEST_ARTICLE_ID)).andExpect(status().isOk());
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.formation.blog.model.Review;
 import com.formation.blog.service.ReviewService;
 import com.formation.blog.web.ReviewController;
 
@@ -40,7 +41,13 @@ public class ReviewControllerTests {
 
 	@Test
 	public void testCreateReview() throws Exception {
+		Review review = new Review();
+		review.setArticleId(3);
+		review.setAuthor("Louis");
+		review.setContent("Very good article !");
+		review.setId(1);
+		
 		mockMvc.perform(post("/review/new").content(jsonStringReview).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated()).equals(review);
 	}
 }
