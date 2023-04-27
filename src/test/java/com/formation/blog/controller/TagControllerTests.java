@@ -2,6 +2,7 @@ package com.formation.blog.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.formation.blog.model.Tag;
 import com.formation.blog.service.TagService;
 import com.formation.blog.web.TagController;
 
@@ -40,13 +42,18 @@ public class TagControllerTests {
 
 	@Test
 	public void testCreateTag() throws Exception {
+		Tag tag = new Tag();
+		tag.setId(1);
+		tag.setName("Science");
+		
+		
 		mockMvc.perform(post("/tags/new").content(jsonStringTag).contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+				.accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated()).equals(tag);
 	}
 
 	@Test
 	public void testGetArticleTags() throws Exception {
-		mockMvc.perform(get("/articles/" + TEST_ARTICLE_ID + "/tags")).andExpect(status().isOk());
+		mockMvc.perform(get("/articles/" + TEST_ARTICLE_ID + "/tags")).andExpect(status().isOk()).andDo(print());
 	}
 
 	@Test
